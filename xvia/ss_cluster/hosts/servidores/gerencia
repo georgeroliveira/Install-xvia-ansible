@@ -1,0 +1,8 @@
+[master]
+[ip do host principal] nodename=xv-gerencia1
+
+[slaves]
+[ip do host secundario nodename=xv-gerencia2
+
+[slaves:vars]
+master_host=[ip do host principal]

@@ -1,0 +1,5 @@
+---
+package_source: "xvia"
+#xvia_repository_url: "https://storage.googleapis.com/xvia-release"
+xvia_repository_url: "http://storage.googleapis.com/artifacts.xvia-main.appspot.com/xvia-releases"
+xvia_version: "6.23.0"
