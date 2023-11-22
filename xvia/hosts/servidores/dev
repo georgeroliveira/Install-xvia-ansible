@@ -1,15 +1,15 @@
 # Central Servers (ubuntu)
-[cs-servers]
+[cs servers]
 
 
 # Security Servers (ubuntu / RHEL)
-[ss-servers]
+[ss servers]
 #ip dos servidores
 
 
-[ca-servers]
+[ca servers]
 
 
 ### vars ###
-[ss-servers:vars]
+[ss servers:vars]
 variant=vanilla

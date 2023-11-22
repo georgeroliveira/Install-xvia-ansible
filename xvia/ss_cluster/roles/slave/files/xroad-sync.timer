@@ -1,5 +1,5 @@
 [Unit]
-Description=Sync X-Road configuration
+Description=Sync X Road configuration
 
 [Timer]
 OnBootSec=60

@@ -1,36 +1,36 @@
----
-# This playbook installs an X-Via environment to the defined host inventory from a remote package repository
+   
+# This playbook installs an X Via environment to the defined host inventory from a remote package repository
 
-- hosts: cs-servers
+  hosts: cs servers
   become: yes
   become_user: root
   roles:
-    - xvia-base
-    - xvia-cs
+      xvia base
+      xvia cs
   tags:
-    - cs
+      cs
   vars_files:
-    - vars_files/local_repo.yml
-    - vars_files/xvia_remote_repo.yml
+      vars_files/local_repo.yml
+      vars_files/xvia_remote_repo.yml
 
-- hosts: ss-servers
+  hosts: ss servers
   become: yes
   become_user: root
   roles:
-    - xvia-base
-    - xvia-ss
+      xvia base
+      xvia ss
   tags:
-    - ss
+      ss
   vars_files:
-    - vars_files/local_repo.yml
-    - vars_files/ss_database.yml
-    - vars_files/xvia_remote_repo.yml
+      vars_files/local_repo.yml
+      vars_files/ss_database.yml
+      vars_files/xvia_remote_repo.yml
 
-- hosts: ca-servers
+  hosts: ca servers
   become: yes
   become_user: root
   pre_tasks:
-    - raw: apt install openssl
+      raw: apt install openssl
   roles:
-    - role: xroad-ca
+      role: xroad ca
       tags: [ 'ca' ]

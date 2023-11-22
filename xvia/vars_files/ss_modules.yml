@@ -1,37 +1,37 @@
----
+   
 ss_modules:
   monitor:
     dir: monitor
     build: build
-    lib: monitor-1.0.jar
+    lib: monitor 1.0.jar
     target: /usr/share/xroad/jlib
   proxy:
     dir: proxy
     build: build
-    lib: proxy-1.0.jar
+    lib: proxy 1.0.jar
     target: /usr/share/xroad/jlib
-  addon-proxy:
+  addon proxy:
     dir: addons/proxymonitor/metaservice
     build: build
-    lib: proxymonitor-metaservice-1.0.jar
+    lib: proxymonitor metaservice 1.0.jar
     target: /usr/share/xroad/jlib/addon/proxy
-  addon-proxy-messagelog:
+  addon proxy messagelog:
     dir: addons/messagelog
     build: build
-    lib: messagelog-1.0.jar
+    lib: messagelog 1.0.jar
     target: /usr/share/xroad/jlib/addon/proxy
-  addon-metaservice:
+  addon metaservice:
     dir: addons/metaservice
     build: build
-    lib: metaservice-1.0.jar
+    lib: metaservice 1.0.jar
     target: /usr/share/xroad/jlib/addon/proxy
-  configuration-client:
-    dir: configuration-client
+  configuration client:
+    dir: configuration client
     build: build
-    lib: configuration-client-1.0.jar
+    lib: configuration client 1.0.jar
     target: /usr/share/xroad/jlib
-  proxy-ui:
-    dir: proxy-ui
+  proxy ui:
+    dir: proxy ui
     build: warble
-    lib: proxy-ui.war
+    lib: proxy ui.war
     target: /usr/share/xroad/jlib/webapps

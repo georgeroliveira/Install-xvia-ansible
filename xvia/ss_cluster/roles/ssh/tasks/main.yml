@@ -1,5 +1,5 @@
----
-- name: generate ssh key
+   
+  name: generate ssh key
   user:
       name: xroad
       generate_ssh_key: yes

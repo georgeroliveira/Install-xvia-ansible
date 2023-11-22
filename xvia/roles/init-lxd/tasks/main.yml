@@ -1,23 +1,23 @@
----
-- name: Ready all Ubuntu {{ubuntu_releasever}} containers
-  with_inventory_hostnames: all:!lxd-servers:!centos-ss
+   
+  name: Ready all Ubuntu {{ubuntu_releasever}} containers
+  with_inventory_hostnames: all:!lxd servers:!centos ss
   lxd_container:
     name: "{{item}}"
     state: started
     source:
       type: image
       mode: pull
-      server: https://cloud-images.ubuntu.com/releases
+      server: https://cloud images.ubuntu.com/releases
       protocol: simplestreams
       alias: "{{ ubuntu_releasever }}"
     profiles: ["default"]
     wait_for_ipv4_addresses: true
     timeout: 600
   tags:
-    - ubuntu-container-init
+      ubuntu container init
 
-- name: Ready all CentOS {{centos_releasever}} containers
-  with_inventory_hostnames: centos-ss
+  name: Ready all CentOS {{centos_releasever}} containers
+  with_inventory_hostnames: centos ss
   lxd_container:
     name: "{{item}}"
     state: started
@@ -31,11 +31,11 @@
     wait_for_ipv4_addresses: true
     timeout: 600
   tags:
-    - centos-container-init
+      centos container init
 
-- name: Install Python2 in container if necessary
+  name: Install Python2 in container if necessary
   delegate_to: "{{item}}"
   raw: >
-    dpkg-query -f '${Status}' -W python python-minimal | grep -q 'ok installed' ||
-    apt-get -qq update && apt-get -qq install python
-  with_inventory_hostnames: all:!lxd-servers:!centos-ss
+    dpkg query  f '${Status}'  W python python minimal | grep  q 'ok installed' ||
+    apt get  qq update && apt get  qq install python
+  with_inventory_hostnames: all:!lxd servers:!centos ss

@@ -15,15 +15,15 @@ class CAHandler(BaseHTTPRequestHandler):
     <title>Test CA</title>
   </head>
   <body>
-    <form method="POST" enctype="multipart/form-data" action="sign">
+    <form method="POST" enctype="multipart/form data" action="sign">
       <fieldset>
         <legend>Test CA: CSR signing</legend>
         <div>
-          <label style="display:inline-block; width:4em" for="csr">CSR</label>
+          <label style="display:inline block; width:4em" for="csr">CSR</label>
           <input name="certreq" type="file" id="csr">
         </div>
         <div>
-          <label style="display:inline-block; width:4em">Type</label>
+          <label style="display:inline block; width:4em">Type</label>
           <input type="radio" name="type" id="sign" value="sign">
           <label for="sign">Sign</label>
           <input type="radio" name="type" id="auth" value="auth">
@@ -32,7 +32,7 @@ class CAHandler(BaseHTTPRequestHandler):
           <label for="auto">Autodetect from file name</label>
         </div>
         <div>
-          <input type="submit" value="Sign" style="margin-top:1em"/>
+          <input type="submit" value="Sign" style="margin top:1em"/>
          </div>
       </fieldset>
     </form>
@@ -46,7 +46,7 @@ class CAHandler(BaseHTTPRequestHandler):
             return
 
         self.send_response(200)
-        self.send_header('Content-Type', 'text/html; charset=utf-8')
+        self.send_header('Content Type', 'text/html; charset=utf 8')
         self.end_headers()
         self.wfile.write(self.FORM_HTML)
 
@@ -54,7 +54,7 @@ class CAHandler(BaseHTTPRequestHandler):
         cgi.maxlen = 10000
 
         expect = self.headers.getheader('expect', "")
-        if expect.lower() == "100-continue":
+        if expect.lower() == "100 continue":
             self.send_response(100)
             self.end_headers()
 
@@ -92,16 +92,16 @@ class CAHandler(BaseHTTPRequestHandler):
                 if p.returncode == 0:
                     crtname = os.path.splitext(req_item.filename)[0].replace("_csr_", "_crt_")
                     self.send_response(200, 'OK')
-                    self.send_header('Content-Type', 'application/octet-stream')
-                    self.send_header('Content-Disposition',
+                    self.send_header('Content Type', 'application/octet stream')
+                    self.send_header('Content Disposition',
                                      'attachment; filename="{}.pem"'.format(crtname))
-                    self.send_header('Content-Length', len(out))
+                    self.send_header('Content Length', len(out))
                     self.end_headers()
                     self.wfile.write(out)
                 else:
                     print err
                     self.send_response(500)
-                    self.send_header("Content-Type", 'text/html; charset="utf-8"')
+                    self.send_header("Content Type", 'text/html; charset="utf 8"')
                     self.end_headers()
                     self.wfile.write("<html><body>Error:<pre>{}</pre></body></html>".format(err.encode()))
                 return

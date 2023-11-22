@@ -27,7 +27,7 @@ crl               = $dir/crl/ca.crl.pem
 crl_extensions    = crl_ext
 default_crl_days  = 30
 
-# SHA-1 is deprecated, so use SHA-2 instead.
+# SHA 1 is deprecated, so use SHA 2 instead.
 default_md        = sha256
 
 name_opt          = ca_default
@@ -55,7 +55,7 @@ crl               = $dir/crl/ca.crl.pem
 crl_extensions    = crl_ext
 default_crl_days  = 30
 
-# SHA-1 is deprecated, so use SHA-2 instead.
+# SHA 1 is deprecated, so use SHA 2 instead.
 default_md        = sha256
 
 name_opt          = ca_default
@@ -94,10 +94,10 @@ distinguished_name  = req_distinguished_name
 string_mask         = utf8only
 utf8                = yes
 
-# SHA-1 is deprecated, so use SHA-2 instead.
+# SHA 1 is deprecated, so use SHA 2 instead.
 default_md          = sha256
 
-# Extension to add when the -x509 option is used.
+# Extension to add when the  x509 option is used.
 x509_extensions     = v3_ca
 
 [ req_distinguished_name ]
@@ -114,7 +114,7 @@ commonName                      = Common Name
 #countryName_default             =
 #stateOrProvinceName_default     = 
 #localityName_default            =
-0.organizationName_default      = X-Road Test
+0.organizationName_default      = X Road Test
 organizationalUnitName_default  =
 #emailAddress_default            =
 

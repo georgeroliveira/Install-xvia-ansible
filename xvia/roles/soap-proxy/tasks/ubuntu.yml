@@ -1,5 +1,5 @@
----
-- name: Instala as dependências do Docker
+   
+  name: Instala as dependências do Docker
   apt:
     name: ['docker.io']
     state: present

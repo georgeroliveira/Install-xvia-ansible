@@ -1,5 +1,5 @@
----
-- name: xroad user
+   
+  name: xroad user
   user:
     name: xroad
     comment: "XRoad User"
@@ -8,7 +8,7 @@
     password: '*'
     createhome: "yes"
 
-- name: xroad ui user
+  name: xroad ui user
   user:
     name: "{{ xroad_ui_user }}"
     comment: "XRoad UI User"
@@ -17,36 +17,36 @@
     password: "{{ xroad_ui_user_password }}"
     createhome: "yes"
 
-- import_tasks: ubuntu.yml
+  import_tasks: ubuntu.yml
   when: ansible_os_family == "Debian"
 
-- import_tasks: rhel.yml
+  import_tasks: rhel.yml
   when: ansible_os_family == "RedHat"
 
-- name: clean xroad logs at boot
+  name: clean xroad logs at boot
   cron:
     name: xroad log cleanup
-    job: "/usr/bin/find /var/log/xroad -type f -not -name audit.log \\( -name '*.log' -o -name '*.log.zip' \\) -mtime +1 -exec rm {{ '{} \\;' }} > /dev/null 2>&1"
+    job: "/usr/bin/find /var/log/xroad  type f  not  name audit.log \\(  name '*.log'  o  name '*.log.zip' \\)  mtime +1  exec rm {{ '{} \\;' }} > /dev/null 2>&1"
     special_time: reboot
     cron_file: xroad_log_cleanup
     user: xroad
     state: present
   tags:
-    - cron
+      cron
 
-- name: clean package manager caches at boot (Debian/Ubuntu)
+  name: clean package manager caches at boot (Debian/Ubuntu)
   cron:
     name: clean package cache
-    job: "apt-get clean && apt-get -y autoremove > /dev/null 2>&1"
+    job: "apt get clean && apt get  y autoremove > /dev/null 2>&1"
     special_time: reboot
     cron_file: package_cache_cleanup
     user: root
     state: present
   when: ansible_os_family == "Debian"
   tags:
-    - cron
+      cron
 
-- name: clean package manager caches at boot (RHEL)
+  name: clean package manager caches at boot (RHEL)
   cron:
     name: clean package cache
     job: "yum clean packages > /dev/null 2>&1"
@@ -56,4 +56,4 @@
     state: present
   when: ansible_os_family == "RedHat"
   tags:
-    - cron
+      cron

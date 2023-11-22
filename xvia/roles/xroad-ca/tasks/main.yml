@@ -1,37 +1,37 @@
----
-- name: check that OS is supported
+   
+  name: check that OS is supported
   fail:
     msg: "This playbook only supports Ubuntu"
   when: ansible_os_family != "Debian"
 
-- name: Update repositories cache
+  name: Update repositories cache
   apt:
     update_cache: yes
 
-- name: Check for Python
-  raw: test -e /usr/bin/python
+  name: Check for Python
+  raw: test  e /usr/bin/python
   changed_when: false
   failed_when: false
   register: check_python
 
-- name: Install Python
-  raw: test -e /usr/bin/apt && (apt -y update && apt install -y python-minimal) || (yum -y install python libselinux-python)
+  name: Install Python
+  raw: test  e /usr/bin/apt && (apt  y update && apt install  y python minimal) || (yum  y install python libselinux python)
   when: check_python.rc != 0
 
-- name: install required packages
+  name: install required packages
   package:
       name: "{{ item }}"
       state: present
   with_items:
-    - "acl"
-    - "nginx-light"
+      "acl"
+      "nginx light"
 
-- name: group ca
+  name: group ca
   group:
     name: "ca"
     system: "yes"
 
-- name: ca user
+  name: ca user
   user:
     name: "ca"
     group: "ca"
@@ -39,7 +39,7 @@
     createhome: "yes"
     system: "yes"
 
-- name: ocsp user
+  name: ocsp user
   user:
     name: "ocsp"
     group: "ca"
@@ -47,67 +47,67 @@
     createhome: "yes"
     system: "yes"
 
-- name: copy root user directories
+  name: copy root user directories
   copy:
-    src: "common-files/{{ item }}"
+    src: "common files/{{ item }}"
     dest: /
     group: "root"
     owner: "root"
   with_items:
-    - "etc"
-    - "usr"
+      "etc"
+      "usr"
 
-- name: copy root user directories for bionic
+  name: copy root user directories for bionic
   copy:
-    src: "bionic-files/{{ item }}"
+    src: "bionic files/{{ item }}"
     dest: /
     group: "root"
     owner: "root"
   with_items:
-    - "lib"
+      "lib"
   when: ansible_distribution_release == "bionic"
 
-- name: copy ca group directories
+  name: copy ca group directories
   copy:
-    src: "common-files/{{ item }}"
+    src: "common files/{{ item }}"
     dest: /home
     group: "ca"
     owner: "ca"
   with_items:
-    - "home/ca"
+      "home/ca"
 
-- name: set file permissions
+  name: set file permissions
   file:
     mode: 0755
     path: "/usr/local/bin/{{ item }}"
   with_items:
-    - "sign"
-    - "sign-auth"
-    - "sign-sign"
-    - "ca-revoke"
+      "sign"
+      "sign auth"
+      "sign sign"
+      "ca revoke"
 
-- name: set file permissions 2
+  name: set file permissions 2
   file:
     mode: 0740
     path: "/home/ca/CA/{{ item }}"
   with_items:
-    - "ocsp.sh"
-    - "revoke.sh"
-    - "sign.sh"
-    - "intermediate.sh"
-    - "ocsp.py"
-    - "ca.py"
-    - "sign_req.sh"
+      "ocsp.sh"
+      "revoke.sh"
+      "sign.sh"
+      "intermediate.sh"
+      "ocsp.py"
+      "ca.py"
+      "sign_req.sh"
 
-- name: set file permissions 3
+  name: set file permissions 3
   file:
     mode: 0664
     path: "/home/ca/TSA/{{ item }}"
   with_items:
-    - "TSA.cnf"
-    - "tsa_server.py"
+      "TSA.cnf"
+      "tsa_server.py"
 
-- name: init.sh template
+  name: init.sh template
   template:
     src: "init.sh"
     dest: "/home/ca/CA/init.sh"
@@ -115,12 +115,12 @@
     group: "ca"
     mode: 0700
 
-- name: check if ocsp.log exists
+  name: check if ocsp.log exists
   stat:
     path: /var/log/ocsp.log
   register: stat_result
 
-- name: create ocsp.log
+  name: create ocsp.log
   file:
     path: /var/log/ocsp.log
     state: touch
@@ -129,12 +129,12 @@
     mode: 0664
   when: stat_result.stat.exists == False
 
-- name: check if .init exists
+  name: check if .init exists
   stat:
     path: /home/ca/CA/.init
   register: stat_result
 
-- name: run init.sh
+  name: run init.sh
   shell: ./init.sh > init.log 2>&1
   args:
     chdir: "/home/ca/CA"
@@ -142,29 +142,29 @@
   become_user: ca
   when: stat_result.stat.exists == False
 
-- name: remove obsolete files
+  name: remove obsolete files
   file:
-    path: /etc/nginx/sites-enabled/ocsp.nginx
+    path: /etc/nginx/sites enabled/ocsp.nginx
     state: absent
 
-- name: restart nginx
+  name: restart nginx
   service:
     name: nginx
     state: restarted
 
-- name: restart ocsp
+  name: restart ocsp
   service:
     name: ocsp
     state: restarted
     enabled: yes
 
-- name: restart ca
+  name: restart ca
   service:
     name: ca
     state: restarted
     enabled: yes
 
-- name: restart tsa
+  name: restart tsa
   service:
     name: tsa
     state: restarted

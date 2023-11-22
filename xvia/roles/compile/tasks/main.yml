@@ -1,5 +1,5 @@
----
-- name: compile xroad code
+   
+  name: compile xroad code
   command: ./compile_code.sh
   args:
     chdir: ../src
